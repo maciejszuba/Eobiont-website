@@ -45,7 +45,7 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #cc1eb5;
+  background-color: #b61585;
   text-transform: uppercase;
 }
 
@@ -118,15 +118,15 @@ section h1 {
           align-items: center;
 }
 
-#chart_constructor .chart_input {
-  margin-bottom: 20px;
-}
-
-#chart_constructor .chart_input input {
-  margin-right: 2px;
-}
-
 #chart_constructor button {
   width: 100px;
+}
+
+.chart_input {
+  margin: 10px 0;
+}
+
+.chart_input input {
+  margin-right: 2px;
 }
 /*# sourceMappingURL=style.css.map */

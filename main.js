@@ -16,28 +16,28 @@ Piechart = function (options) {
     this.colors = options.data.map(a => a.color);
 
     this.draw = function () {
-        let total_value = 0;
+        let totalValue = 0;
        
         options.data.forEach(a => {
-            total_value += a.value;
+            totalValue += a.value;
         });
 
-        let start_angle = 0;
-        let slice_angle = 0;
+        let startAngle = 0;
+        let sliceAngle = 0;
 
         options.data.forEach(a => {
-            slice_angle = 2 * Math.PI * a.value / total_value;
+            sliceAngle = 2 * Math.PI * a.value / totalValue;
 
             drawPieSlice(
                 this.ctx, this.canvas.width/2, 
                 this.canvas.height/2, 
                 Math.min(this.canvas.width/2, this.canvas.height/2),
-                start_angle, 
-                start_angle + slice_angle, 
+                startAngle, 
+                startAngle + sliceAngle, 
                 a.color
             );
 
-            start_angle += slice_angle;
+            startAngle += sliceAngle;
         });
 
         //drawing a white circle over the chart
@@ -55,27 +55,27 @@ Piechart = function (options) {
             );
         }
 
-        start_angle = 0;
+        startAngle = 0;
 
         options.data.forEach(a => {
-            slice_angle = 2 * Math.PI * a.value / total_value;
+            sliceAngle = 2 * Math.PI * a.value / totalValue;
 
             let pieRadius = Math.min(this.canvas.width / 2, this.canvas.height / 2);
-            let labelX = this.canvas.width / 2 + (pieRadius / 2) * Math.cos(start_angle + slice_angle / 2);
-            let labelY = this.canvas.height / 2 + (pieRadius / 2) * Math.sin(start_angle + slice_angle / 2);
+            let labelX = this.canvas.width / 2 + (pieRadius / 2) * Math.cos(startAngle + sliceAngle / 2);
+            let labelY = this.canvas.height / 2 + (pieRadius / 2) * Math.sin(startAngle + sliceAngle / 2);
 
             if (this.options.doughnutHoleSize) {
                 let offset = (pieRadius * this.options.doughnutHoleSize) / 2;
-                labelX = this.canvas.width / 2 + (offset + pieRadius / 2) * Math.cos(start_angle + slice_angle / 2);
-                labelY = this.canvas.height / 2 + (offset + pieRadius / 2) * Math.sin(start_angle + slice_angle / 2);
+                labelX = this.canvas.width / 2 + (offset + pieRadius / 2) * Math.cos(startAngle + sliceAngle / 2);
+                labelY = this.canvas.height / 2 + (offset + pieRadius / 2) * Math.sin(startAngle + sliceAngle / 2);
             }
 
-            let  labelText = Math.round(10000 * a.value / total_value)/100;
+            let  labelText = Math.round(10000 * a.value / totalValue)/100;
             this.ctx.fillStyle = "black";
             this.ctx.font = "bold 20px Candara";
             this.ctx.fillText(a.name + "(" + a.value + ")", labelX, labelY);
             this.ctx.fillText(labelText + "%", labelX, (labelY + 25));
-            start_angle += slice_angle;
+            startAngle += sliceAngle;
 
         })
 
@@ -137,7 +137,7 @@ function getDataForChart(){
 
     }
   
-    document.getElementById("chart_input_"+ (iteration -1)).appendChild(newInputDiv);
+    document.getElementById("chart_input_"+ (iteration - 1)).appendChild(newInputDiv);
     newInputDiv.appendChild(newNameInput);
     newInputDiv.appendChild(newValueInput);
     newInputDiv.appendChild(newColorSelection);

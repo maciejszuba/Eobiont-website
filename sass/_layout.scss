@@ -2,7 +2,6 @@
 
 body{
     height: 100vh;
-    // background-image: linear-gradient( to right, $gradient-1st-color, $gradient-2nd-color, $gradient-3rd-color);
     overflow: hidden;
     font-family: "Candara", sans-serif;
 }
@@ -35,7 +34,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(204, 30, 181);
+    background-color: rgb(182, 21, 133);
     text-transform: uppercase;
    
 
@@ -91,15 +90,15 @@ section {
     flex-direction: column;
     align-items: center;
 
-    .chart_input{
-        margin-bottom: 20px;
-
-        input {
-            margin-right: 2px;
-        }
-    }
-
     button {
         width: 100px;
+    }
+}
+
+.chart_input{
+    margin: 10px 0;
+
+    input {
+        margin-right: 2px;
     }
 }
