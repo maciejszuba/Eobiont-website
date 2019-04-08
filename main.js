@@ -1,5 +1,6 @@
-document.getElementById("chart_canvas").width = 600;
-document.getElementById("chart_canvas").height = 400;
+const canvas = document.getElementById("chart_canvas")
+canvas.width = 600;
+canvas.height = 400;
 let chartInputData = [];
 
 function PieChartSlice(name, value, color) {
@@ -20,7 +21,6 @@ Piechart = function (options) {
         options.data.forEach(a => {
             total_value += a.value;
         });
-        console.log(total_value);
 
         let start_angle = 0;
         let slice_angle = 0;
@@ -58,6 +58,7 @@ Piechart = function (options) {
         start_angle = 0;
 
         options.data.forEach(a => {
+            slice_angle = 2 * Math.PI * a.value / total_value;
 
             let pieRadius = Math.min(this.canvas.width / 2, this.canvas.height / 2);
             let labelX = this.canvas.width / 2 + (pieRadius / 2) * Math.cos(start_angle + slice_angle / 2);
@@ -69,7 +70,7 @@ Piechart = function (options) {
                 labelY = this.canvas.height / 2 + (offset + pieRadius / 2) * Math.sin(start_angle + slice_angle / 2);
             }
 
-            let labelText = Math.round(100 * a.value / total_value);
+            let  labelText = Math.round(10000 * a.value / total_value)/100;
             this.ctx.fillStyle = "black";
             this.ctx.font = "bold 20px Candara";
             this.ctx.fillText(a.name + "(" + a.value + ")", labelX, labelY);
@@ -148,9 +149,11 @@ function getDataForChart(){
 }
 
 function generateChart() {
+    canvas.getContext("2d").clearRect(0,0,600,400);
+
     let myPiechart = new Piechart(
         {
-            canvas: document.getElementById("chart_canvas"),
+            canvas: canvas,
             data: chartInputData,
             doughnutHoleSize: 0.5
         }
