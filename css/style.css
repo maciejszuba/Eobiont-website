@@ -59,13 +59,17 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-right: 100px;
+  margin-right: 200px;
 }
 
 .nav li {
   font-size: 2rem;
   text-align: center;
   margin: 0 20px;
+}
+
+.nav a:hover {
+  color: white;
 }
 
 section {
@@ -101,7 +105,7 @@ section h1 {
   display: flex;
 }
 
-.chart_constructor {
+#chart_constructor {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -114,11 +118,15 @@ section h1 {
           align-items: center;
 }
 
-.chart_constructor .chart_input {
+#chart_constructor .chart_input {
   margin-bottom: 20px;
 }
 
-.chart_constructor button {
+#chart_constructor .chart_input input {
+  margin-right: 2px;
+}
+
+#chart_constructor button {
   width: 100px;
 }
 /*# sourceMappingURL=style.css.map */

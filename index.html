@@ -30,24 +30,24 @@
             <h1>Za moich czasów takie sprawy załatwiało się inaczej</h1>
             <div class="chart_container">
                 <canvas id="chart_canvas"></canvas>
-                <div class="chart_constructor">
-                    <div class="chart_input">
-                        <input type="text" name="category" placeholder="Category">
-                        <input type="text" name="value" placeholder="Value">
+                <div id="chart_constructor">
+                    <div class="chart_input" id="chart_input_0">
+                        <input type="text" name="name" placeholder="Category">
+                        <input type="number" name="value" placeholder="Value">
                         <select name="color">
                                 <option value="red">Red</option>
                                 <option value="yellow">Yellow</option>
                                 <option value="blue">Blue</option>
                                 <option value="green">Green</option>
-                                <option value="Pink">Pink</option>
+                                <option value="pink">Pink</option>
                                 <option value="cyan">Cyan</option>
                                 <option value="beige">Beige</option>
                                 <option value="orange">Orange</option>
                         </select>
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Submit" onclick="getDataForChart()">
 
                     </div>
-                    <button>Generate Chart</button>
+                    <button onclick="generateChart()">Generate Chart</button>
                 </div>
             </div>
         </section>

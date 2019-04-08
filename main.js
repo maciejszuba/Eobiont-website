@@ -2,30 +2,13 @@ document.getElementById("chart_canvas").width = 600;
 document.getElementById("chart_canvas").height = 400;
 let chartInputData = [];
 
-trial();
-
-function trial() {
-    chartInputData.push(new PieChartSlice("dupa", 30, "blue"));
-    chartInputData.push(new PieChartSlice("gunwo", 77, "red"));
-    chartInputData.push(new PieChartSlice("giśka", 59, "pink"));
-    console.log(chartInputData.map(a => a.name));
-}
-
-
 function PieChartSlice(name, value, color) {
     this.name = name;
     this.value = value;
     this.color = color;
 }
 
-// var chartInputData = {
-//     "Classical music": 10,
-//     "Alternative rock": 14,
-//     "Pop": 2,
-//     "Jazz": 12
-// };
-
-let Piechart = function (options) {
+Piechart = function (options) {
     this.options = options;
     this.canvas = options.canvas;
     this.ctx = this.canvas.getContext("2d");
@@ -99,15 +82,81 @@ let Piechart = function (options) {
 
 }
 
-let myPiechart = new Piechart(
-    {
-        canvas: document.getElementById("chart_canvas"),
-        data: chartInputData,
-        doughnutHoleSize: 0.5
-    }
-);
-myPiechart.draw();
+let iteration = 0;
+function getDataForChart(){
+   
+    chartInputData.push(new PieChartSlice(document.getElementsByName("name")[iteration].value, 
+                        parseInt(document.getElementsByName("value")[iteration].value), 
+                        document.getElementsByName("color")[iteration].value));
 
+    iteration++;
+    console.log(iteration);
+
+    let newInputDiv = document.createElement("div");
+    let newNameInput = document.createElement("input");
+    let newValueInput = document.createElement("input");
+    let newColorSelection = document.createElement("select");
+    let newSubmitInput = document.createElement("input");
+
+    newInputDiv.setAttribute("id", "chart_input_"+iteration);
+    newInputDiv.classList.add("chart_input");
+
+    newNameInput.setAttribute("type", "text");
+    newNameInput.setAttribute("name", "name");
+    newNameInput.setAttribute("placeholder", "Category");
+
+    newValueInput.setAttribute("type", "number");
+    newValueInput.setAttribute("name", "value");
+    newValueInput.setAttribute("placeholder", "Value");
+
+    newColorSelection.setAttribute("name", "color");
+
+    newSubmitInput.setAttribute("type", "submit");
+    newSubmitInput.setAttribute("value", "Submit");
+    newSubmitInput.setAttribute("onclick", "getDataForChart()");
+
+    let colors = {
+        "Red" : "red",
+        "Yellow" : "yellow",
+        "Blue" : "blue", 
+        "Green" : "green",
+        "Pink" : "pink",
+        "Cyan" : "cyan",
+        "Beige" : "beige",
+        "Orange" : "orange"
+    };
+
+    for (color in colors) {
+      
+        let colorOption = document.createElement("option");
+        colorOption.setAttribute("value", colors[color]);
+        colorOption.innerHTML = color;
+
+        newColorSelection.appendChild(colorOption);
+
+    }
+  
+    document.getElementById("chart_input_"+ (iteration -1)).appendChild(newInputDiv);
+    newInputDiv.appendChild(newNameInput);
+    newInputDiv.appendChild(newValueInput);
+    newInputDiv.appendChild(newColorSelection);
+    newInputDiv.appendChild(newSubmitInput)
+
+    console.log(iteration);
+    console.log(chartInputData);
+    
+}
+
+function generateChart() {
+    let myPiechart = new Piechart(
+        {
+            canvas: document.getElementById("chart_canvas"),
+            data: chartInputData,
+            doughnutHoleSize: 0.5
+        }
+    );
+    myPiechart.draw();
+}
 
 function drawPieSlice(ctx, centerX, centerY, radius, startAngle, endAngle, color) {
     ctx.fillStyle = color;
