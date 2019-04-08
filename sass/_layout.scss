@@ -2,8 +2,9 @@
 
 body{
     height: 100vh;
-    background-image: linear-gradient( to right, $gradient-1st-color, $gradient-2nd-color, $gradient-3rd-color);
+    // background-image: linear-gradient( to right, $gradient-1st-color, $gradient-2nd-color, $gradient-3rd-color);
     overflow: hidden;
+    font-family: "Candara", sans-serif;
 }
 
 ul {
@@ -12,6 +13,7 @@ ul {
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 .container {
@@ -33,7 +35,9 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: violet;
+    background-color: rgb(204, 30, 181);
+    text-transform: uppercase;
+   
 
     img {
         margin-left: 200px;
@@ -69,9 +73,25 @@ section {
 }
 
 #home {
-    background-color: red;
+    background-color: lightseagreen;
 }
 
-#chart_canvas {
+.chart_container{
     margin-top: 30px;
+    display: flex;
+}
+
+
+.chart_constructor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .chart_input{
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 100px;
+    }
 }

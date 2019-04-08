@@ -1,48 +1,65 @@
 document.getElementById("chart_canvas").width = 600;
 document.getElementById("chart_canvas").height = 400;
+let chartInputData = [];
 
-let myVinyls = {
-    "Classical music": 20,
-    "Alternative rock": 4,
-    "Pop": 29,
-    "Jazz": 42
-};
+trial();
+
+function trial() {
+    chartInputData.push(new PieChartSlice("dupa", 30, "blue"));
+    chartInputData.push(new PieChartSlice("gunwo", 77, "red"));
+    chartInputData.push(new PieChartSlice("giśka", 59, "pink"));
+    console.log(chartInputData.map(a => a.name));
+}
+
+
+function PieChartSlice(name, value, color) {
+    this.name = name;
+    this.value = value;
+    this.color = color;
+}
+
+// var chartInputData = {
+//     "Classical music": 10,
+//     "Alternative rock": 14,
+//     "Pop": 2,
+//     "Jazz": 12
+// };
 
 let Piechart = function (options) {
     this.options = options;
     this.canvas = options.canvas;
     this.ctx = this.canvas.getContext("2d");
-    this.colors = options.colors;
+    this.colors = options.data.map(a => a.color);
 
     this.draw = function () {
-        var total_value = 0;
-        var color_index = 0;
-        for (var categ in this.options.data) {
-            var val = this.options.data[categ];
-            total_value += val;
-        }
+        let total_value = 0;
+       
+        options.data.forEach(a => {
+            total_value += a.value;
+        });
+        console.log(total_value);
 
-        var start_angle = 0;
-        for (categ in this.options.data) {
-            val = this.options.data[categ];
-            var slice_angle = 2 * Math.PI * val / total_value;
+        let start_angle = 0;
+        let slice_angle = 0;
+
+        options.data.forEach(a => {
+            slice_angle = 2 * Math.PI * a.value / total_value;
 
             drawPieSlice(
-                this.ctx,
-                this.canvas.width / 2,
-                this.canvas.height / 2,
-                Math.min(this.canvas.width / 2, this.canvas.height / 2),
-                start_angle,
-                start_angle + slice_angle,
-                this.colors[color_index % this.colors.length]
+                this.ctx, this.canvas.width/2, 
+                this.canvas.height/2, 
+                Math.min(this.canvas.width/2, this.canvas.height/2),
+                start_angle, 
+                start_angle + slice_angle, 
+                a.color
             );
 
             start_angle += slice_angle;
-            color_index++;
-        }
+        });
 
         //drawing a white circle over the chart
         //to create the doughnut chart
+        
         if (this.options.doughnutHoleSize) {
             drawPieSlice(
                 this.ctx,
@@ -56,9 +73,9 @@ let Piechart = function (options) {
         }
 
         start_angle = 0;
-        for (categ in this.options.data) {
-            val = this.options.data[categ];
-            slice_angle = 2 * Math.PI * val / total_value;
+
+        options.data.forEach(a => {
+
             let pieRadius = Math.min(this.canvas.width / 2, this.canvas.height / 2);
             let labelX = this.canvas.width / 2 + (pieRadius / 2) * Math.cos(start_angle + slice_angle / 2);
             let labelY = this.canvas.height / 2 + (pieRadius / 2) * Math.sin(start_angle + slice_angle / 2);
@@ -69,12 +86,14 @@ let Piechart = function (options) {
                 labelY = this.canvas.height / 2 + (offset + pieRadius / 2) * Math.sin(start_angle + slice_angle / 2);
             }
 
-            var labelText = Math.round(100 * val / total_value);
-            this.ctx.fillStyle = "white";
-            this.ctx.font = "bold 20px Arial";
-            this.ctx.fillText(labelText + "%", labelX, labelY);
+            let labelText = Math.round(100 * a.value / total_value);
+            this.ctx.fillStyle = "black";
+            this.ctx.font = "bold 20px Candara";
+            this.ctx.fillText(a.name + "(" + a.value + ")", labelX, labelY);
+            this.ctx.fillText(labelText + "%", labelX, (labelY + 25));
             start_angle += slice_angle;
-        }
+
+        })
 
     }
 
@@ -83,8 +102,7 @@ let Piechart = function (options) {
 let myPiechart = new Piechart(
     {
         canvas: document.getElementById("chart_canvas"),
-        data: myVinyls,
-        colors: ["#fde23e", "#f16e23", "#57d9ff", "#937e88"],
+        data: chartInputData,
         doughnutHoleSize: 0.5
     }
 );
