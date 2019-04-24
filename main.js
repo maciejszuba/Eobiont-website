@@ -84,14 +84,10 @@ Piechart = function (options) {
 }
 
 let iteration = 0;
-function getDataForChart(){
-   
-    chartInputData.push(new PieChartSlice(document.getElementsByName("name")[iteration].value, 
-                        parseInt(document.getElementsByName("value")[iteration].value), 
-                        document.getElementsByName("color")[iteration].value));
 
-    iteration++;
-    console.log(iteration);
+addInputFields();
+
+function addInputFields(){
 
     let newInputDiv = document.createElement("div");
     let newNameInput = document.createElement("input");
@@ -136,12 +132,74 @@ function getDataForChart(){
         newColorSelection.appendChild(colorOption);
 
     }
-  
-    document.getElementById("chart_input_"+ (iteration - 1)).appendChild(newInputDiv);
+    
+    document.getElementById("chart_input_fields").appendChild(newInputDiv);
     newInputDiv.appendChild(newNameInput);
     newInputDiv.appendChild(newValueInput);
     newInputDiv.appendChild(newColorSelection);
     newInputDiv.appendChild(newSubmitInput)
+    iteration++;
+}
+
+function getDataForChart(){
+    console.log(iteration);
+    chartInputData.push(new PieChartSlice(document.getElementsByName("name")[iteration-1].value, 
+                        parseInt(document.getElementsByName("value")[iteration-1].value), 
+                        document.getElementsByName("color")[iteration-1].value));
+
+    // iteration++;
+    console.log(iteration);
+
+    addInputFields();
+    // let newInputDiv = document.createElement("div");
+    // let newNameInput = document.createElement("input");
+    // let newValueInput = document.createElement("input");
+    // let newColorSelection = document.createElement("select");
+    // let newSubmitInput = document.createElement("input");
+
+    // newInputDiv.setAttribute("id", "chart_input_"+iteration);
+    // newInputDiv.classList.add("chart_input");
+
+    // newNameInput.setAttribute("type", "text");
+    // newNameInput.setAttribute("name", "name");
+    // newNameInput.setAttribute("placeholder", "Category");
+
+    // newValueInput.setAttribute("type", "number");
+    // newValueInput.setAttribute("name", "value");
+    // newValueInput.setAttribute("placeholder", "Value");
+
+    // newColorSelection.setAttribute("name", "color");
+
+    // newSubmitInput.setAttribute("type", "submit");
+    // newSubmitInput.setAttribute("value", "Submit");
+    // newSubmitInput.setAttribute("onclick", "getDataForChart()");
+
+    // let colors = {
+    //     "Red" : "red",
+    //     "Yellow" : "yellow",
+    //     "Blue" : "blue", 
+    //     "Green" : "green",
+    //     "Pink" : "pink",
+    //     "Cyan" : "cyan",
+    //     "Beige" : "beige",
+    //     "Orange" : "orange"
+    // };
+
+    // for (color in colors) {
+      
+    //     let colorOption = document.createElement("option");
+    //     colorOption.setAttribute("value", colors[color]);
+    //     colorOption.innerHTML = color;
+
+    //     newColorSelection.appendChild(colorOption);
+
+    // }
+  
+    // document.getElementById("chart_input_"+ (iteration - 1)).appendChild(newInputDiv);
+    // newInputDiv.appendChild(newNameInput);
+    // newInputDiv.appendChild(newValueInput);
+    // newInputDiv.appendChild(newColorSelection);
+    // newInputDiv.appendChild(newSubmitInput)
 
     console.log(iteration);
     console.log(chartInputData);

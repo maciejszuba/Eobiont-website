@@ -1,3 +1,7 @@
+html{
+    font-size: 16px;
+}
+
 * {box-sizing: border-box; margin: 0; padding: 0}
 
 body{
@@ -91,14 +95,51 @@ section {
     align-items: center;
 
     button {
-        width: 100px;
+        width: 200px;
+        border: 2px pink solid;
+        border-radius: 6px;
+        background-color: white;
+        padding: 5px;
+        font-size: 1.2rem;
+        font-family: "Candara", sans-serif;
+        font-weight: 600;
+        outline: none;
+
+        &:active{
+            color: white;
+            background-color: pink;
+        }
     }
 }
 
+#chart_engine{
+    display: flex;
+    flex-direction: column;
+}
 .chart_input{
     margin: 10px 0;
 
-    input {
-        margin-right: 2px;
+    input, select{
+        margin-right: 4px;
+        border: 2px pink solid;
+        border-radius: 6px;
+        background-color: white;
+        padding: 5px;
+        font-family: "Candara", sans-serif;
+        font-weight: 600;
+        outline: none;
+        color: black;
+        
+        &::placeholder{
+            color: black;
+        }
+
+        &:focus {
+        background-color: pink;
+        color: white;
+        }
     }
+
+    
+
 }

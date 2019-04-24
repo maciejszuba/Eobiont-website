@@ -1,3 +1,7 @@
+html {
+  font-size: 16px;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -119,14 +123,66 @@ section h1 {
 }
 
 #chart_constructor button {
-  width: 100px;
+  width: 200px;
+  border: 2px pink solid;
+  border-radius: 6px;
+  background-color: white;
+  padding: 5px;
+  font-size: 1.2rem;
+  font-family: "Candara", sans-serif;
+  font-weight: 600;
+  outline: none;
+}
+
+#chart_constructor button:active {
+  color: white;
+  background-color: pink;
+}
+
+#chart_engine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .chart_input {
   margin: 10px 0;
 }
 
-.chart_input input {
-  margin-right: 2px;
+.chart_input input, .chart_input select {
+  margin-right: 4px;
+  border: 2px pink solid;
+  border-radius: 6px;
+  background-color: white;
+  padding: 5px;
+  font-family: "Candara", sans-serif;
+  font-weight: 600;
+  outline: none;
+  color: black;
+}
+
+.chart_input input::-webkit-input-placeholder, .chart_input select::-webkit-input-placeholder {
+  color: black;
+}
+
+.chart_input input:-ms-input-placeholder, .chart_input select:-ms-input-placeholder {
+  color: black;
+}
+
+.chart_input input::-ms-input-placeholder, .chart_input select::-ms-input-placeholder {
+  color: black;
+}
+
+.chart_input input::placeholder, .chart_input select::placeholder {
+  color: black;
+}
+
+.chart_input input:focus, .chart_input select:focus {
+  background-color: pink;
+  color: white;
 }
 /*# sourceMappingURL=style.css.map */
